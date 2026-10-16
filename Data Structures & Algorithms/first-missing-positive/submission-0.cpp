@@ -3,13 +3,16 @@ public:
     int firstMissingPositive(vector<int>& nums) {
         unordered_set<int> st;
         for(int val:nums){
-            st.insert(val);
+            if(val>0){
+                st.insert(val);
+            }
         }
-        int val=1;
-        while(st.find(val)!=st.end()){
-            val++;
+        int smallest=1;
+        while(st.count(smallest)){
+            smallest++;
         }
-        return val;
+        return smallest;
+        
         
     }
 };
