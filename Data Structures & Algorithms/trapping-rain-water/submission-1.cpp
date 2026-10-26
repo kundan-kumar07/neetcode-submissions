@@ -1,53 +1,30 @@
-// class Solution {
-// public:
-//     int trap(vector<int>& height) {
-//         int n=height.size();
-
-//         vector<int> leftMax(n,0);
-//         vector<int> rightMax(n,0);
-//         leftMax[0]=height[0];
-        
-//         for(int i=1;i<n;i++){
-//             leftMax[i]=max(leftMax[i-1],height[i]);
-
-//         }
-//         rightMax[n-1]=height[n-1];
-//         for(int j=n-2;j>=0;j--){
-//             rightMax[j]=max(rightMax[j+1],height[j]);
-//         }
-//         int ans=0;
-//         for(int i=0;i<n;i++){
-//             int low=
-//             ans+=min(leftMax[i],rightMax[i])-height[i];
-//         }
-//         return ans;
-        
-//     }
-// };
 class Solution {
 public:
     int trap(vector<int>& height) {
+        
         int n=height.size();
-        int leftMax=0;
-        int rightMax=0;
-        int l=0;
-        int r=n-1;
-        int ans=0;
-        while(l<r){
-            leftMax=max(leftMax,height[l]);
-            rightMax=max(rightMax,height[r]);
-            if(leftMax<rightMax){
-                ans+=leftMax-height[l];
-                l++;
-            }
-            else{
-                ans+=rightMax-height[r];
-                r--;
-            }
+        if(n==0){
+            return 0;
+        }
+        vector<int> leftMax(n,0);
+        vector<int> rightMax(n,0);
+        leftMax[0]=(height[0]);
+        rightMax[n-1]=(height[n-1]);
+        int sum=0;
+        for(int i=1;i<n;i++){
+            leftMax[i]=(max(height[i],leftMax[i-1]));
+        }
+        for(int i=n-2;i>=0;i--){
+            rightMax[i]=(max(height[i],rightMax[i+1]));
+        }
 
+        for(int i=0;i<n;i++){
+            int h=min(leftMax[i],rightMax[i])-height[i];
+            sum+=h;
 
         }
-        return ans;
+        return sum;
+
         
     }
 };
